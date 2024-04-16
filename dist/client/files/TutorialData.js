@@ -50,8 +50,8 @@ const data = {
                     action: {command: 'Click', arguments: ['menuItem', 'New']}
                 },
                 {
-                    text: 'Enter a name for the Project, like \'My Elements Tutorial\'',
-                    action: {command: 'SetValue', arguments: ['id', 'projectName', 'My Elements Tutorial']}
+                    text: 'Enter a name for the Project, like \'Getting Started Tutorial\'',
+                    action: {command: 'SetValue', arguments: ['id', 'projectName', 'Getting Started Tutorial']}
                 },
                 {
                     text: 'Click Create',
