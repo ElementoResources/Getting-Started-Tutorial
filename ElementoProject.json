@@ -1,0 +1,280 @@
+{
+  "id": "project_1",
+  "name": "Getting Started Tutorial",
+  "properties": {},
+  "elements": [
+    {
+      "id": "app_1",
+      "name": "Main App",
+      "properties": {},
+      "elements": [
+        {
+          "id": "page_1",
+          "name": "Main Page",
+          "properties": {},
+          "elements": [
+            {
+              "id": "text_8",
+              "name": "Title",
+              "properties": {
+                "content": "Hello You"
+              },
+              "kind": "Text"
+            },
+            {
+              "id": "textinput_1",
+              "name": "Your Name",
+              "properties": {},
+              "kind": "TextInput"
+            },
+            {
+              "id": "text_9",
+              "name": "Text 9",
+              "properties": {
+                "content": {
+                  "expr": "'Hello there, ' + YourName"
+                }
+              },
+              "kind": "Text"
+            }
+          ],
+          "kind": "Page"
+        }
+      ],
+      "kind": "App"
+    },
+    {
+      "id": "_TOOLS",
+      "name": "Tools",
+      "properties": {},
+      "elements": [
+        {
+          "id": "tool_1",
+          "name": "Getting Started Tutorial",
+          "properties": {
+            "startupAction": {
+              "expr": "Editor.SetOptions({showBeforeActions: true, showWithPointer: true, delay: 250})"
+            }
+          },
+          "elements": [
+            {
+              "id": "page_2",
+              "name": "Tutorial Page",
+              "properties": {},
+              "elements": [
+                {
+                  "id": "text_2",
+                  "name": "Tutorial Title",
+                  "properties": {
+                    "content": "Getting Started with Elemento",
+                    "styles": {
+                      "fontSize": "20",
+                      "color": "#777"
+                    },
+                    "show": false
+                  },
+                  "kind": "Text"
+                },
+                {
+                  "id": "data_1",
+                  "name": "TutData",
+                  "properties": {
+                    "display": false,
+                    "initialValue": {
+                      "expr": "TutorialData()"
+                    }
+                  },
+                  "kind": "Data"
+                },
+                {
+                  "id": "layout_1",
+                  "name": "Page Layout",
+                  "properties": {
+                    "horizontal": true,
+                    "styles": {
+                      "height": "100%"
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "data_2",
+                      "name": "Current Section",
+                      "properties": {
+                        "initialValue": {
+                          "expr": "SectionList.selectedItem"
+                        },
+                        "display": false
+                      },
+                      "kind": "Data"
+                    },
+                    {
+                      "id": "list_1",
+                      "name": "Section List",
+                      "properties": {
+                        "items": {
+                          "expr": "TutData.sections"
+                        },
+                        "styles": {
+                          "border": "1px solid lightgray",
+                          "height": "100%",
+                          "minWidth": "20em"
+                        },
+                        "selectable": true,
+                        "selectedItem": {
+                          "expr": "0"
+                        },
+                        "selectAction": {
+                          "expr": "document.querySelector('[id$=TutorialSection]').scrollTo(0,0)"
+                        }
+                      },
+                      "elements": [
+                        {
+                          "id": "text_3",
+                          "name": "Section Name",
+                          "properties": {
+                            "content": {
+                              "expr": "$item.title"
+                            }
+                          },
+                          "kind": "Text"
+                        }
+                      ],
+                      "kind": "List"
+                    },
+                    {
+                      "id": "layout_2",
+                      "name": "Tutorial Section",
+                      "properties": {},
+                      "elements": [
+                        {
+                          "id": "text_4",
+                          "name": "Section Title",
+                          "properties": {
+                            "content": {
+                              "expr": "CurrentSection.title"
+                            },
+                            "styles": {
+                              "fontSize": "larger",
+                              "fontWeight": "normal"
+                            }
+                          },
+                          "kind": "Text"
+                        },
+                        {
+                          "id": "text_5",
+                          "name": "Start Text",
+                          "properties": {
+                            "content": {
+                              "expr": "CurrentSection.startText"
+                            },
+                            "styles": {
+                              "fontWeight": "normal"
+                            }
+                          },
+                          "kind": "Text"
+                        },
+                        {
+                          "id": "list_2",
+                          "name": "Steps List",
+                          "properties": {
+                            "items": {
+                              "expr": "CurrentSection.steps"
+                            },
+                            "selectable": true,
+                            "styles": {
+                              "flex": "1 0"
+                            }
+                          },
+                          "elements": [
+                            {
+                              "id": "layout_3",
+                              "name": "Step Layout",
+                              "properties": {
+                                "horizontal": true
+                              },
+                              "elements": [
+                                {
+                                  "id": "text_6",
+                                  "name": "Step Text",
+                                  "properties": {
+                                    "content": {
+                                      "expr": "$item.text"
+                                    }
+                                  },
+                                  "kind": "Text"
+                                },
+                                {
+                                  "id": "button_1",
+                                  "name": "Show Me",
+                                  "properties": {
+                                    "appearance": "link",
+                                    "action": {
+                                      "expr": "let target = $item.action.target == 'Preview' ? Preview : Editor\ntarget[$item.action.command](...$item.action.arguments)"
+                                    },
+                                    "show": {
+                                      "expr": "!!$item.action"
+                                    }
+                                  },
+                                  "kind": "Button"
+                                }
+                              ],
+                              "kind": "Layout"
+                            }
+                          ],
+                          "kind": "List"
+                        },
+                        {
+                          "id": "text_7",
+                          "name": "End Text",
+                          "properties": {
+                            "content": {
+                              "expr": "CurrentSection.endText"
+                            },
+                            "styles": {
+                              "fontWeight": "normal"
+                            }
+                          },
+                          "kind": "Text"
+                        },
+                        {
+                          "id": "button_2",
+                          "name": "Next",
+                          "properties": {
+                            "action": {
+                              "expr": "Set(SectionList, ItemAfter(TutData.sections, SectionList.selectedItem))"
+                            }
+                          },
+                          "kind": "Button"
+                        }
+                      ],
+                      "kind": "Layout"
+                    }
+                  ],
+                  "kind": "Layout"
+                }
+              ],
+              "kind": "Page"
+            },
+            {
+              "id": "functionimport_1",
+              "name": "TutorialData",
+              "properties": {
+                "source": "TutorialData.js"
+              },
+              "kind": "FunctionImport"
+            }
+          ],
+          "kind": "Tool"
+        }
+      ],
+      "kind": "ToolFolder"
+    },
+    {
+      "id": "_COMPONENTS",
+      "name": "Components",
+      "properties": {},
+      "kind": "ComponentFolder"
+    }
+  ],
+  "kind": "Project"
+}
